@@ -10,31 +10,31 @@ const NodeNum = 3 // # of nodes
 const PodNum = 6  // # of replicas
 const alpha = 1.0 // ratio between processing delay and latency
 
-type Node struct {	// Resource data type for the nodes
+type Node struct { // Resource data type for the nodes
 	Name string
 	CPU  float64
 	RAM  float64
 	B    float64
 }
 
-type NodeDelay struct {	//	Records the corresponding latency to the node
+type NodeDelay struct { //	Records the corresponding latency to the node
 	Name  string
 	Delay float64
 }
 
-type NumOfCon struct {	// Records the number of containers(Pods) on the node
+type NumOfCon struct { // Records the number of containers(Pods) on the node
 	Name   string
 	Number float64
 }
 
-type Pod struct {	// Resource data type of the container(Pod)
+type Pod struct { // Resource data type of the container(Pod)
 	Name string
 	CPU  float64
 	RAM  float64
 	B    float64
 }
 
-type FinalScore struct {	// Scoring result for the node-pod pairing
+type FinalScore struct { // Scoring result for the node-pod pairing
 	NodeName string
 	PodName  string
 	Score    float64
@@ -231,7 +231,7 @@ func main() {
 				FS[i].PodName = P[i].Name
 
 				if Fail[i] { // assign a large delay value (9999999) to unavailable node(s)
-					fs[i] = 9999999	// Should use something like INT_MAX, would be better
+					fs[i] = 9999999 // Should use something like INT_MAX, would be better
 					FS[i].Score = 9999999
 				} else {
 					if NSub[i].CPU > NLastSession[i].CPU { // if the "computation delay" is larger in current session than the last session
